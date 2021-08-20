@@ -1,0 +1,4 @@
+exif
+hachoir
+pdfminer.six
+python-docx
