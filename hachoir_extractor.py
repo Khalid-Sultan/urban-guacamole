@@ -3,7 +3,6 @@ from hachoir.metadata import extractMetadata
 from sys import argv, stderr, exit
 
 def extract(path):
-    print(path)
     parser = createParser(path)
     if path == None:
         print("usage: %s filename" % argv[0], file=stderr)

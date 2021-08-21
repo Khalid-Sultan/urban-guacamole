@@ -1,4 +1,5 @@
 exif
 hachoir
-pdfminer.six
-python-docx
+pdfminer3
+psidialogs
+PyExifTool
