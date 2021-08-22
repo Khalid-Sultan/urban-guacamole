@@ -1,5 +1,5 @@
+easygui
 exif
 hachoir
 pdfminer3
-psidialogs
 PyExifTool
