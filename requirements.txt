@@ -1,5 +1,2 @@
-easygui
-exif
-hachoir
-pdfminer3
-PyExifTool
+requests
+validators
