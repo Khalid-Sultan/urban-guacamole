@@ -5,28 +5,28 @@ class Websites:
         self.host = host
         self.websites = {
             'Google': {
-                'Google': 'https://www.google.com/search?num=100&start=0&hl=en&q="%40{word}"'
+                'Google': 'https://www.google.com/search?num=25&start=0&hl=en&q="%40{word}"'
             },
             'Bing': {
-                'Bing': 'http://www.bing.com/search?q=%40{word}&count=50&first=0'
+                'Bing': 'http://www.bing.com/search?q=%40{word}&count=25&first=0'
             },
             'Yahoo': {
-                'Yahoo': "http://search.yahoo.com/search?p=%40{word}&n=100&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0"
+                'Yahoo': "http://search.yahoo.com/search?p=%40{word}&n=25&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0"
             },
             'Github': {
-                'Google' : 'https://www.google.com/search?num=100&start=0&hl=en&q=site%3Agithub.com+"%40{word}"',
-                'Yahoo': "http://search.yahoo.com/search?p=site%3Agithub.com+%40{word}&n=100&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
-                'Bing': "http://www.bing.com/search?q=site%3Agithub.com+%40{word}&count=50&first=0",
+                'Google' : 'https://www.google.com/search?num=25&start=0&hl=en&q=site%3Agithub.com+"%40{word}"',
+                'Yahoo': "http://search.yahoo.com/search?p=site%3Agithub.com+%40{word}&n=25&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
+                'Bing': "http://www.bing.com/search?q=site%3Agithub.com+%40{word}&count=25&first=0",
             },
             'LinkedIn': {
-                'Google': 'https://www.google.com/search?num=100&start=0&hl=en&q=site%3Alinkedin.com+"%40{word}"',
-                'Yahoo': "http://search.yahoo.com/search?p=site%3Alinkedin.com+%40{word}&n=100&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
-                'Bing': "http://www.bing.com/search?q=site%3Alinkedin.com+%40{word}&count=50&first=0"
+                'Google': 'https://www.google.com/search?num=25&start=0&hl=en&q=site%3Alinkedin.com+"%40{word}"',
+                'Yahoo': "http://search.yahoo.com/search?p=site%3Alinkedin.com+%40{word}&n=25&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
+                'Bing': "http://www.bing.com/search?q=site%3Alinkedin.com+%40{word}&count=25&first=0"
             },
             'Twitter': {
-                'Google': 'https://www.google.com/search?num=100&start=0&hl=en&q=site%3Atwitter.com+intitle:"on Twitter"+"%40{word}"',
-                'Yahoo': "http://search.yahoo.com/search?p=site%3Atwitter.com+%40{word}&n=100&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
-                'Bing': "http://www.bing.com/search?q=site%3Atwitter.com+%40{word}&count=50&first=0"
+                'Google': 'https://www.google.com/search?num=25&start=0&hl=en&q=site%3Atwitter.com+intitle:"on Twitter"+"%40{word}"',
+                'Yahoo': "http://search.yahoo.com/search?p=site%3Atwitter.com+%40{word}&n=25&ei=UTF-8&va_vt=any&vo_vt=any&ve_vt=any&vp_vt=any&vd=all&vst=0&vf=all&vm=p&fl=0&fr=yfp-t-152&xargs=0&pstart=1&b=0",
+                'Bing': "http://www.bing.com/search?q=site%3Atwitter.com+%40{word}&count=25&first=0"
             }
         }
         self.urls = deque()
