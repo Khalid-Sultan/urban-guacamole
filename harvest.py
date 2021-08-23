@@ -36,7 +36,7 @@ class Harvester:
                 r=self.session.get(urly, headers=headers, proxies=proxies)
             else:
                 r=self.session.get(urly, headers=headers)
-            r.html.render()
+            r.html.render(retries=2, timeout=2)
             print('Status : ', r.status_code)
             for link in r.html.absolute_links:
                 self.queue.append((link, self.depth+1))
@@ -52,6 +52,7 @@ class Harvester:
         print("[+] Searching in {}: {} entries searched ".format(self.activeEngine, 50))
 
     def get_emails(self):
+        self.session.close()
         self.parser.extract(self.totalresults, self.wrd)
         return self.parser.emails()
 
