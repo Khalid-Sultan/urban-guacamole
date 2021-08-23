@@ -13,10 +13,23 @@ Features included:
 - Custom Timeout
 - File output
 
+To run the script, use the following steps
+
+1. Install requirements
+`pip install -r requirements.txt`
+2. Run the following on the terminal
+`python main.py`
+3. Follow the instructions
+
+**Since the script isn't implemented with threading in mind which can greately improve the speed of the script, Use fewer engines.**
+
+**Status Code of 409 and log messages as Document is Empty or Navigation Timeout Exceeded are signs that either you are locked out from the engines due to Terms of Services or insufficient network connection**
+
+
 #### In order for this script to work as intended, please input a timeout>=2 seconds as most websites block scraping tasks because they go against their terms of services.
 
 
-#### Collaborators
+### Collaborators
 
 - Eyosias Samson - ATR/0484/09
 - Gemmechu Mohammed - ATR/1432/09

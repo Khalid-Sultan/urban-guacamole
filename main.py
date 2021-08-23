@@ -1,7 +1,6 @@
 import sys
 import time
 import utils
-from harvest import Harvester
 from websites import Websites
 
 if __name__ == '__main__':
@@ -62,12 +61,10 @@ if __name__ == '__main__':
         print(err)
         sys.exit(1)
 
-    print(header, proxy, domain)
-    app = Harvester(header, proxy, timeout)
     all_emails = []
     visited = set()
     for e in engine:
-        w = Websites(app, e, visited)
+        w = Websites(e, visited, header, proxy, timeout,domain)
         all_emails += w.search(domain)
 
     all_emails = list(set(all_emails))
@@ -91,7 +88,7 @@ if __name__ == '__main__':
                 for email in all_emails:
                     try:
                         out_file.write(email + "\n")
-                    except:
+                    except Exception:
                         print("Couldn't add this email to a file: " + email)
         except Exception as e:
             print("Error occured while saving to a file: " + e)
