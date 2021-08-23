@@ -1,59 +1,60 @@
 import requests
+from requests_html import HTMLSession
 import sys
 import time
 from parser import Parser
 
 class Harvester:
 
-    def __init__(self, userAgent, proxy):
+    def __init__(self, userAgent, proxy, timeout):
         self.proxy = proxy
         self.userAgent = userAgent
         self.parser = Parser()
-    
-    def show_message(self, msg):
-        print(msg)
-        
-    def init_search(self, url, word, limit, counterInit, counterStep, engineName):
+        self.timeout = timeout
+
+    def init_search(self, url, depth, word, engineName, queue):
         self.url = url
-        self.word = word
-        self.limit = int(limit)
-
-        self.ctr = int(counterInit)
-        self.step = int(counterStep)
-
+        self.wrd = word
+        self.depth = depth
+        
         self.activeEngine = engineName
+
+        self.queue = queue
 
         self.results = ""
         self.totalresults = ""
+        self.session = HTMLSession()
+
         
     def do_search(self):
         try:
-            urly = self.url.format(counter=str(self.ctr), word=self.word)
-            headers = {'User-Agent': self.userAgent}
+            urly = self.url.format(word=self.wrd)
+            headers = {'User-Agent': self.userAgent, "referer":"referer: https://www.google.com/"}
             r = None
             if self.proxy:
-                proxies = {self.proxy.scheme: "http://" + self.proxy.netloc}
-                r=requests.get(urly, headers=headers, proxies=proxies)
+                proxies = { self.proxy.scheme: self.proxy.scheme + "://" + self.proxy.netloc}
+                r=self.session.get(urly, headers=headers, proxies=proxies)
             else:
-                r=requests.get(urly, headers=headers)
-
-            if r.encoding is None:
-                r.encoding = 'UTF-8'
-            self.results = r.content.decode(r.encoding)
-            self.totalresults += self.results
-                
+                r=self.session.get(urly, headers=headers)
+            r.html.render()
+            print('Status : ', r.status_code)
+            for link in r.html.absolute_links:
+                self.queue.append((link, self.depth+1))
+            self.totalresults += r.html.find('html', first=True).html
         except Exception as e:
             print(e)
-            sys.exit(4)
+            # sys.exit(4)
 
         
     def process(self):
-        while self.ctr < self.limit:
-            self.do_search()
-            time.sleep(1)
-            self.ctr += self.step
-            print("[+] Searching in {}: {} results ".format(self.activeEngine, str(self.ctr)))
+        self.do_search()
+        time.sleep(self.timeout)
+        print("[+] Searching in {}: {} entries searched ".format(self.activeEngine, 50))
 
     def get_emails(self):
-        self.parser.extract(self.totalresults, self.word)
+        self.parser.extract(self.totalresults, self.wrd)
         return self.parser.emails()
+
+    def show_message(self, msg):
+        print(msg)    
+

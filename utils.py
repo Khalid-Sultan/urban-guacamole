@@ -1,4 +1,3 @@
-
 import validators
 from websites import AvailableWebsites
 from urllib.parse import urlparse
@@ -15,16 +14,16 @@ def checkProxyUrl(url):
         return None, 'Invalid {} Proxy URL (example: http://127.0.0.1:8080).'.format(url)
 
 
-def limit_type(x):
+def timeout_limit(x):
     try:
         if not x:
-            return 100, None
+            return 2, None
         x = int(x)
         if x > 0:
             return x, None
-        return None, "Minimum results limit is 1."
+        return None, "Minimum results timeout is 1."
     except:
-        return None, "Invalid limit provided {}".format(x)
+        return None, "Invalid timeout provided {}".format(x)
 
 def checkDomain(value):
     try:
@@ -43,13 +42,12 @@ def cleanEngines(chosen):
             return list(AvailableWebsites.values()), None
         chosen = chosen.split()
         for i in chosen:
-            if i!='' and int(i) in AvailableWebsites:
+            if i!='' and str(i) in AvailableWebsites:
                 res.append(AvailableWebsites[i])
             else:
                 return None, 'Invalid choice selected {}'.format(i)
         if not res:
             return list(AvailableWebsites.values()), None
         return res, None
-    except Exception as err:
-        return None, err
-        # 'Invalid choice selected'
+    except:
+        return None, 'Invalid choices selected'

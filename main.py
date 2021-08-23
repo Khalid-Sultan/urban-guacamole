@@ -22,53 +22,53 @@ if __name__ == '__main__':
     print("Hi, I am Guac")
     print("I am your friendly email harvester for 'educational' purposes and nothing more ;) ")
     print("\n\n What's the domain you want to harvest emails for? \
-                \n\tExample: Giving 'aait' will make the script search for aait domain having emails")
+                \n\tExample: Giving 'gmail.com' will make the script search for gmail domain having emails")
     domain,err = utils.checkDomain(input())
     if err:
         print(err)
         sys.exit(1)
 
-    print('\n\n Okay the agents I have at the moment are the following: \
+    print('\n Okay the agents(Using Google, Yahoo and Bing) I have at the moment are the following: \
                 \n\t 1 - Github\
                 \n\t 2 - Google\
                 \n\t 3 - Instagram\
                 \n\t 4 - LinkedIn\
                 \n\t 5 - Reddit\
                 \n\t 6 - Twitter\
-                \n\t 7 - Youtube\
                 \n Skip with Clicking enter if you want to search through all \
-                \n Or type out with space inbetween, which ones you want to search for like "1 2 4 7"')
+                \n Or type out with space inbetween, which ones you want to search for like "1 2 4"')
     engine = None
     engine,err = utils.cleanEngines(input())
     if err:
         print(err)
         sys.exit(1)
-    
-    print("\n\n How many emails do you want? \
-            \n\tDefault: 100")
-    limit,err = utils.limit_type(input())
-    if err:
-        print(err)
-        sys.exit(1)
-    limit = min(limit,100)
 
-    print('\n\n Do you want a custom user agent header? Click enter if you want to continue with the default')
+    print('\n Do you want a custom user agent header? Click enter if you want to continue with the default')
     header = input()
-    header = header if header else "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"
+    header = header if header else "Chrome"
 
-    print('\n\n Do you want a custom proxy to check with? Click enter if you want to continue with the default')
+    print('\n Do you want a custom proxy to check with? Click enter if you want to continue with the default')
     proxy, err = utils.checkProxyUrl(input())
     if err:
         print(err)
         sys.exit(1)
 
-    print(header, proxy, domain, limit)
-    app = Harvester(header, proxy)
-    all_emails = []
+    print('\n Last but not least, the program runs on a 2 second break between each request \
+        \n\t to avoid being locked out from most companies TOS violation \
+        \n\t Do you want to set a custom timer check (In seconds)? \
+        \n\t Default: 2')
+    timeout, err = utils.timeout_limit(input())
+    if err:
+        print(err)
+        sys.exit(1)
 
+    print(header, proxy, domain)
+    app = Harvester(header, proxy, timeout)
+    all_emails = []
+    visited = set()
     for e in engine:
-        w = Websites(app, e)
-        all_emails += w.search(domain, limit)
+        w = Websites(app, e, visited)
+        all_emails += w.search(domain)
 
     all_emails = list(set(all_emails))
     
@@ -80,7 +80,8 @@ if __name__ == '__main__':
     for emails in all_emails:
         print(emails)
     
-    inp = input("Hi, It's me again, do you want these emails saved to a file? y/n")
+    print("Hi, It's me again, do you want these emails saved to a file? y/n")
+    inp = input()
     if inp and (inp=='y' or inp=='Y'):
         try:
             now = time.localtime()
