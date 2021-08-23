@@ -52,7 +52,7 @@ class Websites:
             url,depth = self.urls.popleft()   
             if url in self.visited:
                 continue
-            if depth>2:
+            if depth>1:
                 continue
             self.visited.add(url)     
             self.harvester.init_search(url, depth, domain, url, self.urls)
