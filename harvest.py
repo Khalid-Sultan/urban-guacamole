@@ -42,7 +42,7 @@ class Harvester:
                 self.queue.append((link, self.depth+1))
             self.totalresults += r.html.find('html', first=True).html
         except Exception as e:
-            print(e)
+            print('Failed for {}'.format(self.url))
             # sys.exit(4)
 
         
