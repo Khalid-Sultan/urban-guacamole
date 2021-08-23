@@ -42,14 +42,15 @@ class Harvester:
                 self.queue.append((link, self.depth+1))
             self.totalresults += r.html.find('html', first=True).html
         except Exception as e:
-            print('Failed for {}'.format(self.url))
+            pass
+            # print('Failed for {}'.format(urly))
             # sys.exit(4)
 
         
     def process(self):
         self.do_search()
         time.sleep(self.timeout)
-        print("[+] Searching in {}".format(self.activeEngine))
+        print("[+] Searching in {}".format(self.url.format(word=self.wrd)))
 
     def get_emails(self):
         self.session.close()
