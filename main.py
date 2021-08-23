@@ -29,12 +29,12 @@ if __name__ == '__main__':
         sys.exit(1)
 
     print('\n Okay the agents(Using Google, Yahoo and Bing) I have at the moment are the following: \
-                \n\t 1 - Github\
-                \n\t 2 - Google\
-                \n\t 3 - Instagram\
+                \n\t 1 - Bing\
+                \n\t 2 - Github\
+                \n\t 3 - Google\
                 \n\t 4 - LinkedIn\
-                \n\t 5 - Reddit\
-                \n\t 6 - Twitter\
+                \n\t 5 - Twitter\
+                \n\t 6 - Yahoo\
                 \n Skip with Clicking enter if you want to search through all \
                 \n Or type out with space inbetween, which ones you want to search for like "1 2 4"')
     engine = None
